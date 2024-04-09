@@ -1,6 +1,5 @@
-import { auth, database } from "@/firebase/firebase.config";
+import { auth } from "@/firebase/firebase.config";
 import { User, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { User as UserInfo } from '../lib/types/user.type'
 import { create } from "zustand";
 
 interface IAuthStore {
@@ -19,6 +18,8 @@ const useAuthStore = create<IAuthStore>((set) => ({
         email,
         password
       );
+
+      console.log(userCredentials)
       const user = userCredentials.user;
 
       set({ user });
