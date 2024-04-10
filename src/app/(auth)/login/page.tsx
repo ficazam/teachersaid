@@ -1,21 +1,27 @@
 "use client";
-import useAuthStore from "@/store/auth.store";
-import useUserStore from "@/store/user.store";
+import { login } from "@/lib/actions/actions";
+import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
+import { Spinner } from 'flowbite-react'
 
 const Login = () => {
-  const [formData, setFormData] = useState({ email: "", password: "" });
-  const { login } = useAuthStore((state) => state);
-  const { user, checkAuthState } = useUserStore(state => state)
+  const [formData, setFormData] = useState<{ email: string; password: string }>(
+    { email: "", password: "" }
+  );
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
+    setIsLoading(true);
 
     try {
       await login(formData.email, formData.password);
-      checkAuthState()
+      router.push("/");
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(true);
     }
   };
 
@@ -63,7 +69,7 @@ const Login = () => {
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           type="submit"
         >
-          Login
+          {isLoading ? <Spinner /> : "Login"}
         </button>
       </form>
     </div>
