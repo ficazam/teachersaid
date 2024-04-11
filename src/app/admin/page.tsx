@@ -2,8 +2,8 @@ import LogoutButton from "../ui/components/LogoutButton";
 
 const AdminHome = () => {
   return (
-    <div>
-      AdminHome
+    <div className="h-screen justify-center items-center flex flex-col">
+      <p>AdminHome</p>
       <LogoutButton />
     </div>
   );

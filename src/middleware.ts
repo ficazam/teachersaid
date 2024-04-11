@@ -7,12 +7,15 @@ export const middleware = (request: NextRequest) => {
   const roleCookie = cookies().get("_role");
 
   if (!roleCookie && !url.pathname.startsWith("/login")) {
-    return NextResponse.rewrite(new URL("/login", request.url));
+    return NextResponse.redirect(new URL("/login", request.url));
   }
 
   if (roleCookie && !url.pathname.startsWith(`/${roleCookie.value}`)) {
-    return NextResponse.rewrite(new URL(`/${roleCookie.value}`, request.url));
+    console.log(roleCookie.value);
+    return NextResponse.redirect(new URL(`/${roleCookie.value}`, request.url));
   }
 
   return NextResponse.next();
 };
+
+export const config = { matcher: ["/"] };

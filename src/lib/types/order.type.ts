@@ -3,18 +3,20 @@ import { Item } from "./item.type";
 
 export interface Order {
   id: string;
-  createDate: Date;
+  creationDate: Date;
   deliveryDate: Date;
   status: OrderStatus;
+  schoolId: string;
   requiresApproval: boolean;
   items: Item[];
 }
 
-export const emptyOrder = {
+export const emptyOrder: Order = {
   id: "",
-  createDate: new Date(),
+  creationDate: new Date(),
   deliveryDate: new Date(),
   status: OrderStatus.Ordered,
   requiresApproval: false,
   items: [],
+  schoolId: ''
 };

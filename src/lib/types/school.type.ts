@@ -5,10 +5,14 @@ export interface ISchoolInfo {
   name: string;
   image?: string;
   status: SchoolStatus;
+  principalId: string;
+  employees: string[]
 }
 
-export const emptySchool = {
+export const emptySchool: ISchoolInfo = {
   id: "",
   name: "",
   status: SchoolStatus.Active,
+  principalId: '',
+  employees: []
 };

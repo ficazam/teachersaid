@@ -8,11 +8,12 @@ export interface User {
   name: string;
   surname: string;
   role: UserRole;
+  schoolId?: string;
   status: UserStatus;
   orders: Order[];
 }
 
-export const emptyUser = {
+export const emptyUser: User = {
   id: "",
   image: "",
   name: "",

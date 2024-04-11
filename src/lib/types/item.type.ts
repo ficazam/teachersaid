@@ -3,12 +3,13 @@ export interface Item {
   image?: string;
   name: string;
   type: string;
+  schoolId: string;
   inStock: number;
   ordered: number;
   isTemporal: boolean;
 }
 
-export const emptyItem = {
+export const emptyItem: Item = {
   id: "",
   image: "",
   name: "",
@@ -16,4 +17,5 @@ export const emptyItem = {
   inStock: 0,
   ordered: 0,
   isTemporal: false,
+  schoolId: "",
 };

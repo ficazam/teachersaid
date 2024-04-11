@@ -41,7 +41,7 @@ export const logout = async () => {
     const roleCookie = cookies().get("_role");
     const roleValue = roleCookie?.value;
 
-    if (!roleCookie || roleValue) {
+    if (!roleCookie || !roleValue) {
       console.error({
         name: "no session",
         message: "No user currently logged in",
