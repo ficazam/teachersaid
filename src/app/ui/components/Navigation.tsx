@@ -2,6 +2,7 @@
 import { logout } from "@/lib/actions/actions";
 import Button from "../../ui/components/Button";
 import { useRouter, usePathname } from "next/navigation";
+import { IoArrowBack } from 'react-icons/io5'
 
 const Navigation = ({ userNav }: { userNav: string }) => {
   const router = useRouter();
@@ -33,11 +34,7 @@ const Navigation = ({ userNav }: { userNav: string }) => {
       } items-center  px-5 absolute top-0 w-screen h-20 ${background}`}
     >
       {isHome && (
-        <Button
-          role="cancel"
-          buttonLabel="back"
-          onClickHandler={() => router.back()}
-        />
+        <IoArrowBack onClick={() => router.back()} className="text-white h-7 w-7" />
       )}
       <Button
         role="cancel"
