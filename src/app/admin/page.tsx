@@ -1,4 +1,5 @@
-import AdminCard from "./components/AdminCard";
+import Link from "next/link";
+import Card from "../ui/components/Card";
 
 const AdminHome = () => {
   const adminButtons = [
@@ -10,11 +11,11 @@ const AdminHome = () => {
       <h1 className="text-4xl">Admin Home</h1>
       <div className="flex mb-48">
         {adminButtons.map((button) => (
-          <AdminCard
-            key={button.direction}
-            linkDirection={`/admin/${button.direction}`}
-            cardLabel={button.label}
-          />
+          <Link href={`/admin/${button.direction}`} key={button.direction}>
+            <Card>
+              <p>{button.label}</p>
+            </Card>
+          </Link>
         ))}
       </div>
     </>

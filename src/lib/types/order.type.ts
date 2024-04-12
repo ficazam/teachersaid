@@ -7,6 +7,7 @@ export interface Order {
   deliveryDate: Date;
   status: OrderStatus;
   schoolId: string;
+  teacherId: string;
   requiresApproval: boolean;
   items: Item[];
 }
@@ -17,6 +18,7 @@ export const emptyOrder: Order = {
   deliveryDate: new Date(),
   status: OrderStatus.Ordered,
   requiresApproval: false,
+  teacherId: "",
   items: [],
-  schoolId: ''
+  schoolId: "",
 };
