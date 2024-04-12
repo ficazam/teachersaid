@@ -30,8 +30,6 @@ export const login = async (email: string, password: string) => {
       throw new Error();
     }
 
-    console.log(user);
-
     cookieStore.set("_role", user.role, {
       expires,
       secure: true,
