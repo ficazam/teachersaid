@@ -3,10 +3,20 @@ import { logout } from "@/lib/actions/actions";
 import Button from "../../ui/components/Button";
 import { useRouter, usePathname } from "next/navigation";
 
-const AdminNav = () => {
+const Navigation = ({ userNav }: { userNav: string }) => {
   const router = useRouter();
   const pathname = usePathname();
-  const isPrincipalHome = pathname.split("/").length > 2;
+  const isHome = pathname.split("/").length > 2;
+
+  const colours = [
+    { userType: "admin", colour: "bg-blue-500" },
+    { userType: "principal", colour: "bg-emerald-500" },
+    { userType: "coordinator", colour: "bg-amber-500" },
+    { userType: "teacher", colour: "bg-rose-500" },
+    { userType: "inventory", colour: "bg-indigo-500" },
+  ];
+
+  const background = colours.find((set) => set.userType === userNav)?.colour;
 
   const handleLogout = async () => {
     try {
@@ -19,10 +29,10 @@ const AdminNav = () => {
   return (
     <div
       className={`flex flex-row ${
-        isPrincipalHome ? "justify-between" : "justify-end"
-      } items-center  px-5 absolute top-0 w-screen h-20 bg-emerald-500`}
+        isHome ? "justify-between" : "justify-end"
+      } items-center  px-5 absolute top-0 w-screen h-20 ${background}`}
     >
-      {isPrincipalHome && (
+      {isHome && (
         <Button
           role="cancel"
           buttonLabel="back"
@@ -38,4 +48,4 @@ const AdminNav = () => {
   );
 };
 
-export default AdminNav;
+export default Navigation;
