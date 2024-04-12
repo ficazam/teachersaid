@@ -11,7 +11,6 @@ export const middleware = (request: NextRequest) => {
   }
 
   if (roleCookie && !url.pathname.startsWith(`/${roleCookie.value}`)) {
-    console.log(roleCookie.value);
     return NextResponse.redirect(new URL(`/${roleCookie.value}`, request.url));
   }
 

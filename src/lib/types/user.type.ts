@@ -7,6 +7,7 @@ export interface User {
   image?: string;
   name: string;
   surname: string;
+  email: string;
   role: UserRole;
   schoolId?: string;
   status: UserStatus;
@@ -18,6 +19,7 @@ export const emptyUser: User = {
   image: "",
   name: "",
   surname: "",
+  email: "",
   role: UserRole.Teacher,
   status: UserStatus.Unverified,
   orders: [],
