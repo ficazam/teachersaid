@@ -1,5 +1,5 @@
 "use client";
-import { logout } from "@/lib/actions/actions";
+import { logout } from "@/lib/actions";
 import Button from "../../ui/components/Button";
 import { useRouter, usePathname } from "next/navigation";
 import { IoArrowBack } from 'react-icons/io5'
@@ -40,6 +40,7 @@ const Navigation = ({ userNav }: { userNav: string }) => {
         role="cancel"
         buttonLabel="Log Out"
         onClickHandler={handleLogout}
+        userColour="black"
       />
     </div>
   );

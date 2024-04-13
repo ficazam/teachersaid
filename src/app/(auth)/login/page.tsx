@@ -1,11 +1,14 @@
 "use client";
 import Button from "@/app/ui/components/Button";
 import Input from "@/app/ui/components/Input";
-import { login } from "@/lib/actions/actions";
+import { login } from "@/lib/actions";
+import { User } from "@/lib/types/user.type";
+import useUserStore from "@/store/user.store";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const Login = () => {
+  const { setUser } = useUserStore((state) => state);
   const [formData, setFormData] = useState<{ email: string; password: string }>(
     { email: "", password: "" }
   );
@@ -17,7 +20,8 @@ const Login = () => {
     setIsLoading(true);
 
     try {
-      await login(formData.email, formData.password);
+      const user = await login(formData.email, formData.password);
+      setUser(user);
       router.push("/");
     } catch (error) {
       console.error(error);
@@ -33,14 +37,14 @@ const Login = () => {
         <Input
           inputName="email"
           label="Email"
-          type='email'
+          type="email"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         />
         <Input
           inputName="password"
           label="Password"
-          type='password'
+          type="password"
           value={formData.password}
           onChange={(e) =>
             setFormData({ ...formData, password: e.target.value })
@@ -51,6 +55,7 @@ const Login = () => {
           isLoading={isLoading}
           role="submit"
           buttonLabel="Log In"
+          userColour="blue"
         />
       </form>
     </div>

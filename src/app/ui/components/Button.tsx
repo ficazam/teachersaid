@@ -10,6 +10,7 @@ interface iButtonProps {
   role: "submit" | "cancel" | "danger";
   buttonClassName?: string;
   buttonLabel: string;
+  userColour: string;
 }
 
 const Button = (props: iButtonProps) => {
@@ -21,6 +22,7 @@ const Button = (props: iButtonProps) => {
     role,
     buttonClassName,
     buttonLabel,
+    userColour,
   } = props;
 
   const buttonColours = [
@@ -32,15 +34,15 @@ const Button = (props: iButtonProps) => {
     },
     {
       role: "submit",
-      colour: "bg-blue-500 border-blue-500",
+      colour: `bg-${userColour}-500 border-${userColour}-500`,
       text: "text-white",
-      hover: "hover:bg-blue-700 hover:border-blue-900",
+      hover: `hover:bg-${userColour}-700 hover:border-${userColour}-900`,
     },
     {
       role: "cancel",
-      colour: "bg-white border-blue-200",
-      text: "text-blue-500",
-      hover: "hover:bg-blue-200 hover:border-blue-900",
+      colour: `bg-white border-${userColour}-200`,
+      text: `text-${userColour}-500`,
+      hover: `hover:bg-${userColour}-200 hover:border-${userColour}-900`,
     },
   ];
 

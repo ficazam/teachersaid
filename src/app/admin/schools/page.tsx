@@ -1,4 +1,4 @@
-import { getSchools } from "@/lib/actions/actions";
+import { getSchools } from "@/lib/actions";
 import Card from "../../ui/components/Card";
 
 const Schools = async () => {

@@ -1,8 +1,7 @@
 "use client";
-
 import Button from "@/app/ui/components/Button";
 import Input from "@/app/ui/components/Input";
-import { createNewSchool, createNewUser } from "@/lib/actions/actions";
+import { createNewSchool } from "@/lib/actions";
 import { UserRole } from "@/lib/enums/user-role.enum";
 import { ISchoolInfo, emptySchool } from "@/lib/types/school.type";
 import { User, emptyUser } from "@/lib/types/user.type";
@@ -20,7 +19,7 @@ const NewSchool = () => {
     password: string;
     confirm: string;
   }>({ password: "", confirm: "" });
-  const router = useRouter()
+  const router = useRouter();
 
   const handleValidations = () => {
     if (principalPassword.password !== principalPassword.confirm) {
@@ -41,7 +40,7 @@ const NewSchool = () => {
 
     try {
       await createNewSchool(principal, principalPassword.password, newSchool);
-      router.push('/')
+      router.push("/");
     } catch (error) {
       console.error(error);
     } finally {
@@ -117,6 +116,7 @@ const NewSchool = () => {
           type="submit"
           buttonLabel="Submit New School"
           isLoading={isLoading}
+          userColour="blue"
         />
       </form>
     </>
