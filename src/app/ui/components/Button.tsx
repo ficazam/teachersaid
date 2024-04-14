@@ -1,4 +1,7 @@
 "use client";
+import { UserRole } from "@/lib/enums/user-role.enum";
+import useUserStore from "@/store/user.store";
+
 interface iButtonProps {
   isLoading?: boolean;
   onClickHandler?: (
@@ -7,11 +10,18 @@ interface iButtonProps {
   ) => void;
   disabled?: boolean;
   type?: "submit" | "button" | "reset" | undefined;
-  role: "submit" | "cancel" | "danger";
   buttonClassName?: string;
   buttonLabel: string;
-  userColour: string;
 }
+
+const userColours = [
+  { user: UserRole.Empty, value: "blue" },
+  { user: UserRole.Admin, value: "blue" },
+  { user: UserRole.Principal, value: "emerald" },
+  { user: UserRole.Coordinator, value: "amber" },
+  { user: UserRole.Teacher, value: "rose" },
+  { user: UserRole.Inventory, value: "indigo" },
+];
 
 const Button = (props: iButtonProps) => {
   const {
@@ -19,40 +29,18 @@ const Button = (props: iButtonProps) => {
     onClickHandler,
     disabled = false,
     type = "button",
-    role,
     buttonClassName,
     buttonLabel,
-    userColour,
   } = props;
 
-  const buttonColours = [
-    {
-      role: "danger",
-      colour: "bg-red-500 border-red-500",
-      text: "text-white",
-      hover: "hover:bg-red-700 hover:border-red-900",
-    },
-    {
-      role: "submit",
-      colour: `bg-${userColour}-500 border-${userColour}-500`,
-      text: "text-white",
-      hover: `hover:bg-${userColour}-700 hover:border-${userColour}-900`,
-    },
-    {
-      role: "cancel",
-      colour: `bg-white border-${userColour}-200`,
-      text: `text-${userColour}-500`,
-      hover: `hover:bg-${userColour}-200 hover:border-${userColour}-900`,
-    },
-  ];
-
-  const selectedButton = buttonColours.find((set) => set.role === role);
+  const { user } = useUserStore((state) => state);
+  const colour = userColours.find((colour) => colour.user === user.role)?.value;
 
   return (
     <button
       type={type}
       disabled={disabled}
-      className={`font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline border ${selectedButton?.colour} ${selectedButton?.text} ${selectedButton?.hover} ${buttonClassName}`}
+      className={`font-bold w-full py-2 px-4 rounded focus:outline-none focus:shadow-outline border bg-${colour}-500 border-${colour}-500 text-white hover:bg-${colour}-700 hover:border-${colour}-900 ${buttonClassName}`}
       onClick={(
         event: React.MouseEvent<HTMLButtonElement> &
           React.FormEvent<HTMLFormElement>
@@ -63,4 +51,57 @@ const Button = (props: iButtonProps) => {
   );
 };
 
-export default Button;
+const CancelButton = (props: iButtonProps) => {
+  const {
+    isLoading,
+    onClickHandler,
+    disabled = false,
+    type = "button",
+    buttonClassName,
+    buttonLabel,
+  } = props;
+
+  const { user } = useUserStore((state) => state);
+  const colour = userColours.find((colour) => colour.user === user.role)?.value;
+
+  return (
+    <button
+      type={type}
+      disabled={disabled}
+      className={`font-bold w-full py-2 px-4 rounded focus:outline-none focus:shadow-outline border bg-white border-${colour}-500 text-${colour}-500 hover:bg-${colour}-200 hover:border-${colour}-900  ${buttonClassName}`}
+      onClick={(
+        event: React.MouseEvent<HTMLButtonElement> &
+          React.FormEvent<HTMLFormElement>
+      ) => onClickHandler?.(event)}
+    >
+      {isLoading ? "Loading..." : buttonLabel}
+    </button>
+  );
+};
+
+const DangerButton = (props: iButtonProps) => {
+  const {
+    isLoading,
+    onClickHandler,
+    disabled = false,
+    type = "button",
+    buttonLabel,
+    buttonClassName,
+  } = props;
+
+  return (
+    <button
+      type={type}
+      disabled={disabled}
+      className={`font-bold w-full py-2 px-4 rounded focus:outline-none focus:shadow-outline border bg-red-500 border-red-500 text-white hover:bg-red-700 hover:border-red-900 ${buttonClassName}`}
+      onClick={(
+        event: React.MouseEvent<HTMLButtonElement> &
+          React.FormEvent<HTMLFormElement>
+      ) => onClickHandler?.(event)}
+    >
+      {isLoading ? "Loading..." : buttonLabel}
+    </button>
+  );
+};
+
+export { Button, CancelButton, DangerButton };

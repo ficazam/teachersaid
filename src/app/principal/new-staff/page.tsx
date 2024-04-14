@@ -5,7 +5,7 @@ import { FormEvent, useState } from "react";
 import Input from "@/app/ui/components/Input";
 import { User, emptyUser } from "@/lib/types/user.type";
 import useUserStore from "@/store/user.store";
-import Button from "@/app/ui/components/Button";
+import { Button } from "@/app/ui/components/Button";
 import { UserStatus } from "@/lib/enums/user-status.enum";
 import { createNewUser } from "@/lib/actions";
 import { useRouter } from "next/navigation";
@@ -19,7 +19,7 @@ const AddStaff = () => {
     confirm: string;
   }>({ password: "", confirm: "" });
   const { user } = useUserStore((state) => state);
-  const router = useRouter()
+  const router = useRouter();
 
   const staffRoles = [
     { id: 1, label: "Coordinator", value: UserRole.Coordinator },
@@ -47,16 +47,15 @@ const AddStaff = () => {
     try {
       const newUser: User = {
         ...newStaff,
-        role: staffRoles[selectedStaffRole-1].value,
+        role: staffRoles[selectedStaffRole - 1].value,
         schoolId: user.schoolId,
-        status: UserStatus.Active
+        status: UserStatus.Active,
       };
 
-      await createNewUser(newUser, newStaffPassword.password)
-      router.push('/')
+      await createNewUser(newUser, newStaffPassword.password);
+      router.push("/");
     } catch (error) {
       console.error(error);
-    } finally {
       setIsLoading(false);
     }
   };
@@ -101,7 +100,7 @@ const AddStaff = () => {
           inputName="staffPassword"
           value={newStaffPassword.password}
           label="New User's Password"
-          type='password'
+          type="password"
           onChange={(e) =>
             setNewStaffPassword({
               ...newStaffPassword,
@@ -113,7 +112,7 @@ const AddStaff = () => {
           inputName="staffConfirm"
           value={newStaffPassword.confirm}
           label="Confirm New User's Password"
-          type='password'
+          type="password"
           onChange={(e) =>
             setNewStaffPassword({
               ...newStaffPassword,
@@ -124,9 +123,7 @@ const AddStaff = () => {
         <Button
           type="submit"
           isLoading={isLoading}
-          role="submit"
           buttonLabel="Create New User"
-          userColour="emerald"
         />
       </form>
     </>

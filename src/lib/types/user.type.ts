@@ -20,7 +20,7 @@ export const emptyUser: User = {
   name: "",
   surname: "",
   email: "",
-  role: UserRole.Teacher,
+  role: UserRole.Empty,
   status: UserStatus.Unverified,
   orders: [],
 };

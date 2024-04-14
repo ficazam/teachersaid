@@ -1,8 +1,7 @@
 "use client";
-import Button from "@/app/ui/components/Button";
+import { Button } from "@/app/ui/components/Button";
 import Input from "@/app/ui/components/Input";
 import { login } from "@/lib/actions";
-import { User } from "@/lib/types/user.type";
 import useUserStore from "@/store/user.store";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -25,7 +24,6 @@ const Login = () => {
       router.push("/");
     } catch (error) {
       console.error(error);
-    } finally {
       setIsLoading(false);
     }
   };
@@ -53,9 +51,7 @@ const Login = () => {
         <Button
           type="submit"
           isLoading={isLoading}
-          role="submit"
           buttonLabel="Log In"
-          userColour="blue"
         />
       </form>
     </div>

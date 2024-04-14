@@ -1,5 +1,5 @@
 "use client";
-import Button from "@/app/ui/components/Button";
+import { Button } from "@/app/ui/components/Button";
 import Input from "@/app/ui/components/Input";
 import { createNewSchool } from "@/lib/actions";
 import { UserRole } from "@/lib/enums/user-role.enum";
@@ -43,7 +43,6 @@ const NewSchool = () => {
       router.push("/");
     } catch (error) {
       console.error(error);
-    } finally {
       setIsLoading(false);
     }
   };
@@ -112,11 +111,9 @@ const NewSchool = () => {
         />
 
         <Button
-          role="submit"
           type="submit"
           buttonLabel="Submit New School"
           isLoading={isLoading}
-          userColour="blue"
         />
       </form>
     </>

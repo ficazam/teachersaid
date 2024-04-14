@@ -1,6 +1,6 @@
 "use client";
 import { logout } from "@/lib/actions";
-import Button from "../../ui/components/Button";
+import useUserStore from "@/store/user.store";
 import { useRouter, usePathname } from "next/navigation";
 import { IoArrowBack, IoLogOutOutline } from "react-icons/io5";
 
@@ -8,6 +8,7 @@ const Navigation = ({ userNav }: { userNav: string }) => {
   const router = useRouter();
   const pathname = usePathname();
   const isHome = pathname.split("/").length > 2;
+  const { clearUser } = useUserStore()
 
   const colours = [
     { userType: "admin", colour: "bg-blue-500" },
@@ -22,6 +23,7 @@ const Navigation = ({ userNav }: { userNav: string }) => {
   const handleLogout = async () => {
     try {
       await logout();
+      clearUser()
       router.push("/");
     } catch (error) {
       console.error(error);

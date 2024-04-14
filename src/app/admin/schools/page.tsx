@@ -7,15 +7,17 @@ const Schools = async () => {
   return (
     <>
       <h1 className="text-4xl">All Schools</h1>
-      {schools ? (
-        schools.map((school) => (
-          <Card key={school.id}>
-            <p>{school.name}</p>
-          </Card>
-        ))
-      ) : (
-        <p>No schools to display yet.</p>
-      )}
+      <div className="mb-48">
+        {schools ? (
+          schools.map((school) => (
+            <Card key={school.id}>
+              <p>{school.name}</p>
+            </Card>
+          ))
+        ) : (
+          <p>No schools to display yet.</p>
+        )}
+      </div>
     </>
   );
 };

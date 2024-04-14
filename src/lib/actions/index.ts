@@ -1,5 +1,5 @@
-export * from './login'
-export * from './createNewSchool'
-export * from './createNewUser'
-export * from './logout'
-export * from './getSchools'
+export { login } from "./login";
+export { createNewSchool, updateSchool } from "./createNewSchool";
+export { createNewUser } from "./createNewUser";
+export { logout } from "./logout";
+export { getSchools, getSingleSchool } from "./getSchools";
