@@ -3,13 +3,14 @@ import { Card } from "./components";
 
 const PrincipalHome = () => {
   const adminButtons = [
-    { direction: "new-item", label: "Add Item to Inventory" },
+    { direction: "items", label: "View Inventory" },
     { direction: "orders", label: "View Orders" },
+    { direction: "new-item", label: "Add Item to Inventory" },
   ];
   return (
     <>
       <h1 className="text-4xl">Inventory Home</h1>
-      <div className="flex mb-48">
+      <div className="flex flex-wrap justify-center">
         {adminButtons.map((button) => (
           <Link href={`/inventory/${button.direction}`} key={button.direction}>
             <Card>

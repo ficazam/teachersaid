@@ -1,12 +1,11 @@
 "use client";
 import { motion } from "framer-motion";
 
-const Loader = ({ chosenColour }: { chosenColour: string }) => {
-  const colour = `bg-${chosenColour}-500`;
+const Loader = () => {
   return (
-    <div className={`w-[80%] h-2 bg-white rounded-full mx-2`}>
+    <div className={`w-[80%] h-2 bg-gradient-to-r from-white via-white via-50% to-slate-300/65 rounded-full mx-2`}>
       <motion.div
-        className={`h-full rounded-full ${colour} flex w-[20%]`}
+        className={`h-full rounded-full bg-slate-300 flex w-[20%]`}
         animate={{
           x: [0, "400%", 0],
         }}

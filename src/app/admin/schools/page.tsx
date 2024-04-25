@@ -9,7 +9,7 @@ const Schools = async () => {
   return (
     <>
       <h1 className="text-4xl">All Schools</h1>
-      <Suspense fallback={<Loader chosenColour="blue" />}>
+      <Suspense fallback={<Loader="blue" />}>
         <div className="mb-48">
           {schools ? (
             schools.map((school) => (

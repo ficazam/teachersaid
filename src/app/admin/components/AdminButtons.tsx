@@ -33,7 +33,7 @@ const Button = (props: iButtonProps) => {
           React.FormEvent<HTMLFormElement>
       ) => onClickHandler?.(event)}
     >
-      {isLoading ? <Loader chosenColour="blue" /> : buttonLabel}
+      {isLoading ? <Loader /> : buttonLabel}
     </button>
   );
 };
@@ -58,7 +58,7 @@ const CancelButton = (props: iButtonProps) => {
           React.FormEvent<HTMLFormElement>
       ) => onClickHandler?.(event)}
     >
-      {isLoading ? <Loader chosenColour="blue" /> : buttonLabel}
+      {isLoading ? <Loader /> : buttonLabel}
     </button>
   );
 };
@@ -83,7 +83,7 @@ const DangerButton = (props: iButtonProps) => {
           React.FormEvent<HTMLFormElement>
       ) => onClickHandler?.(event)}
     >
-      {isLoading ? <Loader chosenColour="red" /> : buttonLabel}
+      {isLoading ? <Loader /> : buttonLabel}
     </button>
   );
 };

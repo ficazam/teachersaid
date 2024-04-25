@@ -1,11 +1,10 @@
 "use client";
-
 import Input from "@/app/ui/components/Input";
 import { Item, emptyItem } from "@/lib/types/item.type";
 import { FormEvent, useState } from "react";
 import { Button } from "../components";
 import useUserStore from "@/store/user.store";
-import { createNewItem } from "@/lib/actions/createNewItem";
+import { createNewItem } from "@/lib/actions";
 import { useRouter } from "next/navigation";
 
 const NewItem = () => {
