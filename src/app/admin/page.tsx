@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Card from "../ui/components/Card";
+import { Card } from "./components";
 
 const AdminHome = () => {
   const adminButtons = [

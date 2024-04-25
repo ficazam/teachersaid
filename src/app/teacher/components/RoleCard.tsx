@@ -7,7 +7,7 @@ interface IRoleCardProps {
 }
 
 const RoleCard = ({ information, onPress, isSelected }: IRoleCardProps) => {
-  const { label } = information;
+  const { id, label, value } = information;
   return (
     <div
       onClick={onPress}

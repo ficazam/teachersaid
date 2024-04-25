@@ -1,6 +1,5 @@
 "use client";
-import { UserRole } from "@/lib/enums/user-role.enum";
-import useUserStore from "@/store/user.store";
+import Loader from "@/app/ui/components/Loader";
 
 interface iButtonProps {
   isLoading?: boolean;
@@ -14,15 +13,6 @@ interface iButtonProps {
   buttonLabel: string;
 }
 
-const userColours = [
-  { user: UserRole.Empty, value: "blue" },
-  { user: UserRole.Admin, value: "blue" },
-  { user: UserRole.Principal, value: "emerald" },
-  { user: UserRole.Coordinator, value: "amber" },
-  { user: UserRole.Teacher, value: "rose" },
-  { user: UserRole.Inventory, value: "indigo" },
-];
-
 const Button = (props: iButtonProps) => {
   const {
     isLoading,
@@ -33,20 +23,17 @@ const Button = (props: iButtonProps) => {
     buttonLabel,
   } = props;
 
-  const { user } = useUserStore((state) => state);
-  const colour = userColours.find((colour) => colour.user === user.role)?.value;
-
   return (
     <button
       type={type}
       disabled={disabled}
-      className={`font-bold w-full py-2 px-4 rounded focus:outline-none focus:shadow-outline border bg-${colour}-500 border-${colour}-500 text-white hover:bg-${colour}-700 hover:border-${colour}-900 ${buttonClassName}`}
+      className={`font-bold w-full min-h-10 flex justify-center items-center rounded focus:outline-none border ring-1 ring-black/5 bg-gradient-to-br from-amber-400/65 to-amber-600/65 border-white text-white ${buttonClassName}`}
       onClick={(
         event: React.MouseEvent<HTMLButtonElement> &
           React.FormEvent<HTMLFormElement>
       ) => onClickHandler?.(event)}
     >
-      {isLoading ? "Loading..." : buttonLabel}
+      {isLoading ? <Loader chosenColour="amber" /> : buttonLabel}
     </button>
   );
 };
@@ -61,20 +48,17 @@ const CancelButton = (props: iButtonProps) => {
     buttonLabel,
   } = props;
 
-  const { user } = useUserStore((state) => state);
-  const colour = userColours.find((colour) => colour.user === user.role)?.value;
-
   return (
     <button
       type={type}
       disabled={disabled}
-      className={`font-bold w-full py-2 px-4 rounded focus:outline-none focus:shadow-outline border bg-white border-${colour}-500 text-${colour}-500 hover:bg-${colour}-200 hover:border-${colour}-900  ${buttonClassName}`}
+      className={`font-bold w-full min-h-10 flex justify-center items-center rounded focus:outline-none focus:shadow-outline border opacity-85 bg-gradient-to-br from-white/65 via-white/65 via-50% to-amber-300/65 border-amber-500 text-amber-500 ${buttonClassName}`}
       onClick={(
         event: React.MouseEvent<HTMLButtonElement> &
           React.FormEvent<HTMLFormElement>
       ) => onClickHandler?.(event)}
     >
-      {isLoading ? "Loading..." : buttonLabel}
+      {isLoading ? <Loader chosenColour="amber" /> : buttonLabel}
     </button>
   );
 };
@@ -93,13 +77,13 @@ const DangerButton = (props: iButtonProps) => {
     <button
       type={type}
       disabled={disabled}
-      className={`font-bold w-full py-2 px-4 rounded focus:outline-none focus:shadow-outline border bg-red-500 border-red-500 text-white hover:bg-red-700 hover:border-red-900 ${buttonClassName}`}
+      className={`font-bold w-full min-h-10 flex justify-center items-center rounded focus:outline-none focus:shadow-outline border opacity-85 bg-gradient-to-br from-red-400/85 to-red-600/85 border-white text-white hover:bg-red-700 hover:border-red-900 ${buttonClassName}`}
       onClick={(
         event: React.MouseEvent<HTMLButtonElement> &
           React.FormEvent<HTMLFormElement>
       ) => onClickHandler?.(event)}
     >
-      {isLoading ? "Loading..." : buttonLabel}
+      {isLoading ? <Loader chosenColour="red" /> : buttonLabel}
     </button>
   );
 };

@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@/app/ui/components/Button";
+import { Button, CancelButton, DangerButton } from "../components";
 import Input from "@/app/ui/components/Input";
 import { login } from "@/lib/actions";
 import useUserStore from "@/store/user.store";
@@ -29,7 +29,7 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-64">
+    <div className="bg-white/20 opacity-85 ring-1 ring-black/20 rounded px-8 pt-6 pb-8 mb-4 w-64">
       <h2 className="text-2xl mb-4">Login</h2>
       <form onSubmit={handleLogin}>
         <Input
@@ -48,11 +48,7 @@ const Login = () => {
             setFormData({ ...formData, password: e.target.value })
           }
         />
-        <Button
-          type="submit"
-          isLoading={isLoading}
-          buttonLabel="Log In"
-        />
+        <Button type="submit" isLoading={isLoading} buttonLabel="Log In" />
       </form>
     </div>
   );

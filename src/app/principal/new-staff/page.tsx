@@ -1,11 +1,11 @@
 "use client";
 import { UserRole } from "@/lib/enums/user-role.enum";
-import RoleCard from "../components/RoleCard";
+import { RoleCard } from "../components";
 import { FormEvent, useState } from "react";
 import Input from "@/app/ui/components/Input";
 import { User, emptyUser } from "@/lib/types/user.type";
 import useUserStore from "@/store/user.store";
-import { Button } from "@/app/ui/components/Button";
+import { Button } from "../components";
 import { UserStatus } from "@/lib/enums/user-status.enum";
 import { createNewUser } from "@/lib/actions";
 import { useRouter } from "next/navigation";

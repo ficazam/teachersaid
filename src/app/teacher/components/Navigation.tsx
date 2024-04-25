@@ -2,38 +2,39 @@
 import { logout } from "@/lib/actions";
 import useUserStore from "@/store/user.store";
 import { useRouter, usePathname } from "next/navigation";
+import { useEffect } from "react";
 import { IoArrowBack, IoLogOutOutline } from "react-icons/io5";
 
-const Navigation = ({ userNav }: { userNav: string }) => {
+
+const Navigation = () => {
   const router = useRouter();
   const pathname = usePathname();
   const isHome = pathname.split("/").length > 2;
-  const { clearUser } = useUserStore()
+  const { user, clearUser } = useUserStore();
 
-  const colours = [
-    { userType: "admin", colour: "bg-blue-500" },
-    { userType: "principal", colour: "bg-emerald-500" },
-    { userType: "coordinator", colour: "bg-amber-500" },
-    { userType: "teacher", colour: "bg-rose-500" },
-    { userType: "inventory", colour: "bg-indigo-500" },
-  ];
-
-  const background = colours.find((set) => set.userType === userNav)?.colour;
+  useEffect(() => {
+    if (!user) {
+      logout()
+        .then(() => clearUser())
+        .then(() => router.push("/"));
+    }
+  }, [user, clearUser, router]);
 
   const handleLogout = async () => {
     try {
       await logout();
-      clearUser()
+      clearUser();
       router.push("/");
     } catch (error) {
       console.error(error);
     }
   };
+
   return (
     <div
       className={`flex flex-row ${
         isHome ? "justify-between" : "justify-end"
-      } items-center  px-5 absolute top-0 w-screen h-20 ${background}`}
+      } shadow-lg items-center px-5 absolute top-0 w-screen h-20 border bg-gradient-to-br from-rose-400/85 to-rose-600/85 ring-1 ring-white/5`}
     >
       {isHome && (
         <IoArrowBack

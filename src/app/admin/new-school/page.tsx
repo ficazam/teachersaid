@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@/app/ui/components/Button";
+import { Button } from "../components";
 import Input from "@/app/ui/components/Input";
 import { createNewSchool } from "@/lib/actions";
 import { UserRole } from "@/lib/enums/user-role.enum";

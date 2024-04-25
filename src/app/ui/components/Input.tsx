@@ -7,7 +7,7 @@ interface iInputProps {
   label: string;
   type?: string;
   inputClassName?: string;
-  value: string;
+  value: string | number;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
