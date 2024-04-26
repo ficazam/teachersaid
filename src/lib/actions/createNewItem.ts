@@ -1,3 +1,4 @@
+'use server'
 import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import { Item } from "../types/item.type";
 import { database } from "@/firebase/firebase.config";

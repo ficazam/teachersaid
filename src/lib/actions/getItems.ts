@@ -1,5 +1,6 @@
+'use server'
 import { database } from "@/firebase/firebase.config";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { Item } from "../types/item.type";
 
 export const getAllItems = async (schoolId: string) => {
@@ -16,3 +17,14 @@ export const getAllItems = async (schoolId: string) => {
     console.error(error);
   }
 };
+
+export const getOneItem = async(schoolId: string, itemId: string) => {
+  try {
+    const itemSnapshot = await getDoc(doc(database, 'Schools', schoolId, 'Items', itemId))
+    const itemDetails = itemSnapshot.data()
+
+    return itemDetails as Item
+  } catch (error) {
+    console.error(error)
+  }
+}

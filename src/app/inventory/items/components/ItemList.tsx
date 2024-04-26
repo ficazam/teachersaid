@@ -2,13 +2,13 @@
 import { getAllItems } from "@/lib/actions";
 import { Item } from "@/lib/types/item.type";
 import useUserStore from "@/store/user.store";
-import { ChangeEvent, useEffect, useState } from "react";
-import { Button, Card } from "../../components";
+import { useEffect, useState } from "react";
+import { Card } from "../../components";
 import { Listbox } from "@headlessui/react";
 
 const ItemList = () => {
   const [items, setItems] = useState<Item[]>([]);
-  const [filter, setFilter] = useState<string>("Select an Item Type");
+  const [filter, setFilter] = useState<string>("All Items");
   const [typeFilters, setTypeFilters] = useState<
     { label: string; value: string }[]
   >([]);
@@ -79,7 +79,7 @@ const ItemList = () => {
             </Card>
           ))
       ) : (
-        <p>No schools to display yet.</p>
+        <p>No items to display yet.</p>
       )}
     </div>
   );
