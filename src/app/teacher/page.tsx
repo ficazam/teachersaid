@@ -9,7 +9,7 @@ const TeacherHome = () => {
   return (
     <>
       <h1 className="text-4xl">Teacher Home</h1>
-      <div className="flex mb-48">
+      <div className="flex">
         {adminButtons.map((button) => (
           <Link href={`/teacher/${button.direction}`} key={button.direction}>
             <Card>

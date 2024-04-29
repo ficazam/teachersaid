@@ -5,6 +5,7 @@ import useUserStore from "@/store/user.store";
 import { useEffect, useState } from "react";
 import { Card } from "../../components";
 import { Listbox } from "@headlessui/react";
+import SelectInput from "@/app/ui/components/SelectInput";
 
 const ItemList = () => {
   const [items, setItems] = useState<Item[]>([]);
@@ -46,26 +47,7 @@ const ItemList = () => {
 
   return (
     <div className="flex flex-col justify-center mt-5">
-      <Listbox
-        as="div"
-        value={filter}
-        onChange={setFilter}
-        className="w-[75vw] border border-indigo-500 rounded"
-      >
-        <Listbox.Button as="button" className='focus:outline-none py-1 px-2 text-base'>{filter}</Listbox.Button>
-        <Listbox.Options className="fixed mt-2 z-50 w-[75vw] focus:outline-none rounded bg-white/50 backdrop-blur-sm ring-1 ring-black shadow-md">
-          {typeFilters.map((typeFilter) => (
-            <Listbox.Option
-              as="div"
-              key={typeFilter.label}
-              value={typeFilter.value}
-              className="text-lg py-1 px-2"
-            >
-              {typeFilter.label}
-            </Listbox.Option>
-          ))}
-        </Listbox.Options>
-      </Listbox>
+      <SelectInput item={filter} setItem={setFilter} options={typeFilters} />
       {items ? (
         items
           .filter((item: Item) =>

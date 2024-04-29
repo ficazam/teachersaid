@@ -34,7 +34,7 @@ const Navigation = () => {
     <div
       className={`flex flex-row ${
         isHome ? "justify-between" : "justify-end"
-      } shadow-lg items-center px-5 fixed top-0 w-screen h-20 border bg-gradient-to-br from-rose-400/85 to-rose-600/85 ring-1 ring-white/5`}
+      } shadow-lg z-50 items-center px-5 fixed top-0 w-screen h-20 border bg-gradient-to-br from-rose-400/85 to-rose-600/85 ring-1 ring-white/5`}
     >
       {isHome && (
         <IoArrowBack

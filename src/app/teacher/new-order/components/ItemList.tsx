@@ -3,9 +3,7 @@ import { getAllItems } from "@/lib/actions";
 import { Item, emptyItem } from "@/lib/types/item.type";
 import useUserStore from "@/store/user.store";
 import { Suspense, useEffect, useState } from "react";
-import { Button, Card } from "../../components";
-import { Listbox } from "@headlessui/react";
-import { IoAdd, IoRemove } from "react-icons/io5";
+import { Button } from "../../components";
 import Loader from "@/app/ui/components/Loader";
 import { createNewOrder } from "@/lib/actions/createNewOrder";
 import { Order } from "@/lib/types/order.type";
@@ -13,13 +11,17 @@ import { v4 } from "uuid";
 import { OrderStatus } from "@/lib/enums/order-status.enum";
 import { useRouter } from "next/navigation";
 import DatePicker from "react-date-picker";
-import 'react-date-picker/dist/DatePicker.css';
-import 'react-calendar/dist/Calendar.css';
+import "react-date-picker/dist/DatePicker.css";
+import "react-calendar/dist/Calendar.css";
+import SelectInput from "@/app/ui/components/SelectInput";
+import OrderItemCard from "../../components/OrderItemCard";
 
 const ItemList = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [items, setItems] = useState<Item[]>([]);
-  const [date, setDate] = useState<Date | null | [Date | null, Date | null]>(new Date());
+  const [date, setDate] = useState<Date | null | [Date | null, Date | null]>(
+    new Date()
+  );
   const [itemsToOrder, setItemsToOrder] = useState<
     { id: string; amount: number }[]
   >([]);
@@ -150,7 +152,7 @@ const ItemList = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center mt-5">
+    <div className="flex flex-col justify-center my-20">
       <Suspense fallback={<Loader />}>
         <Button
           buttonLabel="Order Items"
@@ -158,64 +160,28 @@ const ItemList = () => {
           onClickHandler={handleOrder}
           isLoading={isLoading}
         />
-        <DatePicker value={date} onChange={setDate} className='mb-2' />
-        <Listbox
-          as="div"
-          value={filter}
-          onChange={setFilter}
-          className="grow border border-indigo-500 rounded"
-        >
-          <Listbox.Button
-            as="button"
-            className="w-full focus:outline-none py-1 px-2 text-base"
-          >
-            {filter}
-          </Listbox.Button>
-          <Listbox.Options className="fixed z-10 w-[80vw] focus:outline-none rounded bg-white/75 backdrop-blur-sm ring-1 ring-white shadow-md">
-            {typeFilters.map((typeFilter) => (
-              <Listbox.Option
-                as="div"
-                key={typeFilter.label}
-                value={typeFilter.value}
-                className="text-lg py-1 px-2"
-              >
-                {typeFilter.label}
-              </Listbox.Option>
-            ))}
-          </Listbox.Options>
-        </Listbox>
+        <p className="mb-1">Deliver by: </p>
+        <DatePicker value={date} onChange={setDate} className="mb-2" />
+        <SelectInput item={filter} setItem={setFilter} options={typeFilters} />
         {items ? (
           items
             .filter((item: Item) =>
               filter === "All Items" ? true : filter === item.type
             )
             .map((item: Item) => (
-              <div key={item.id} className="flex">
-                <div className="bg-gradient-to-br p-2 from-rose-300/65 to-rose-500/65 flex flex-col justify-between items-center w-10 my-2 rounded">
-                  <IoAdd
-                    className="text-white h-5 w-5"
-                    onClick={() => handleAddItemToOrder(item.id)}
-                  />
-                  <p className="text-white text-base">
-                    {itemsToOrder.find(
-                      (orderedItem) => orderedItem.id === item.id
-                    )
-                      ? itemsToOrder.find(
-                          (orderedItem) => orderedItem.id === item.id
-                        )!.amount
-                      : ""}
-                  </p>
-                  <IoRemove
-                    className="text-white h-5 w-5"
-                    onClick={() => handleRemoveItemFromOrder(item.id)}
-                  />
-                </div>
-                <Card>
-                  <p className="text-lg">TYPE: {item.type.toUpperCase()}</p>
-                  <p>Name: {item.name}</p>
-                  <p>stock: {item.inStock}</p>
-                </Card>
-              </div>
+              <OrderItemCard
+                key={item.id}
+                item={item}
+                amount={
+                  itemsToOrder.find((orderedItem) => orderedItem.id === item.id)
+                    ? itemsToOrder.find(
+                        (orderedItem) => orderedItem.id === item.id
+                      )!.amount
+                    : ""
+                }
+                onClickAdd={handleAddItemToOrder}
+                onClickRemove={handleRemoveItemFromOrder}
+              />
             ))
         ) : (
           <p>No items to display yet.</p>
