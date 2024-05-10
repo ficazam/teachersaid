@@ -3,11 +3,11 @@ import { getOrders } from "@/lib/actions/getOrders";
 import { Order } from "@/lib/types/order.type";
 import useUserStore from "@/store/user.store";
 import { useEffect, useState } from "react";
-import OrderItemCard from "./components/OrderItemCard";
 import { getSingleSchool } from "@/lib/actions";
 import { getUsers } from "@/lib/actions/getUsers";
 import { UserRole } from "@/lib/enums/user-role.enum";
 import { User } from "@/lib/types/user.type";
+import OrderItemCard from "./components/OrderItemCard";
 
 const Orders = () => {
   const { user } = useUserStore((state) => state);

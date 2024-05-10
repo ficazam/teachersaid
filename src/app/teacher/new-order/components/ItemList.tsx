@@ -14,7 +14,7 @@ import DatePicker from "react-date-picker";
 import "react-date-picker/dist/DatePicker.css";
 import "react-calendar/dist/Calendar.css";
 import SelectInput from "@/app/ui/components/SelectInput";
-import OrderItemCard from "../../components/OrderItemCard";
+import NewOrderItemCard from "../../components/NewOrderItemCard";
 
 const ItemList = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -169,7 +169,7 @@ const ItemList = () => {
               filter === "All Items" ? true : filter === item.type
             )
             .map((item: Item) => (
-              <OrderItemCard
+              <NewOrderItemCard
                 key={item.id}
                 item={item}
                 amount={

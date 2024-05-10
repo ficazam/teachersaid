@@ -2,14 +2,14 @@ import { Item } from "@/lib/types/item.type";
 import { IoAdd, IoRemove } from "react-icons/io5";
 import Card from "./Card";
 
-interface IOrderItemCardProps {
+interface INewOrderItemCardProps {
   item: Item;
   amount: string | number
   onClickAdd: (id: string) => void;
   onClickRemove: (id: string) => void
 }
 
-const OrderItemCard = (props: IOrderItemCardProps) => {
+const NewOrderItemCard = (props: INewOrderItemCardProps) => {
   const { item, amount, onClickAdd, onClickRemove } = props;
 
   return (
@@ -36,4 +36,4 @@ const OrderItemCard = (props: IOrderItemCardProps) => {
   );
 };
 
-export default OrderItemCard;
+export default NewOrderItemCard;
